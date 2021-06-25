@@ -1,7 +1,7 @@
 {
-  "name": "farm.manager.location",
+  "name": "farm.manager.farm",
   "version": "1.0.0",
-  "description": "Farm Manager Location Microservice",
+  "description": "Farm Manager Farm Microservice",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gerr0r/Farm.Manager.Location.git"
+    "url": "git+https://github.com/gerr0r/Farm.Manager.Farm.git"
   },
   "author": "Gergan Ruschev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gerr0r/Farm.Manager.Location/issues"
+    "url": "https://github.com/gerr0r/Farm.Manager.Farm/issues"
   },
-  "homepage": "https://github.com/gerr0r/Farm.Manager.Location#readme",
+  "homepage": "https://github.com/gerr0r/Farm.Manager.Farm#readme",
   "dependencies": {
     "@apollo/federation": "^0.25.2",
     "apollo-server": "^2.25.2",
