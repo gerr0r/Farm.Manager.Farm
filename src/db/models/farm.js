@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Name is required"
+        }
+      }
     },
     ownerId: {
       type: DataTypes.UUID,
@@ -27,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     regionId: {
       type: DataTypes.UUID,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Region is required"
+        }
+      }
     },
     createdAt: {
       allowNull: false,

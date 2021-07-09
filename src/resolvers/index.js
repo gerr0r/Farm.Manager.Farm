@@ -28,15 +28,48 @@ module.exports = {
         }
     },
 
+    Mutation: {
+        async addFarm(parent, args, context) {
+            const { token } = context
+            const ownerId = hasRights(token, 'admin')
+            if (!ownerId) throw new Error('Unauthorized')
+
+            const { name, regionId } = args
+            // TODO Protect: get country from regionId and check if account has an assignment
+
+            try {
+                const farm = await db.Farm.create({
+                    name,
+                    regionId,
+                    ownerId
+                })
+                return farm
+            } catch (error) {
+                console.log(error);
+                throw new Error(error.message)
+            }
+        },
+
+    },
+
     Farm: {
         async __resolveReference(farm) {
             return await db.Farm.findByPk(farm.id)
-        }
+        },
+        async region(farm) {
+            return { __typename: "Region", id: farm.regionId };
+        },
     },
 
     Field: {
         async __resolveReference(field) {
             return await db.Field.findByPk(field.id)
+        }
+    },
+
+    Region: {
+        country(region) {
+            return { __typename: "Country", code: region.countryId }
         }
     }
 }
