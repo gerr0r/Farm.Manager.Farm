@@ -11,6 +11,12 @@ module.exports = {
     },
     async getFarmFields(parent, args, context) {
       const { token } = context;
+
+      // HACK: find a way to check user access for given farm
+      if (hasRights(token, "user")) {
+        return await db.Field.findAll({ where: { farmId: args.farmId } });
+      }
+
       const adminId = hasRights(token, "admin");
       if (!adminId) throw new Error("Unauthorized");
 
@@ -29,6 +35,12 @@ module.exports = {
 
     async getFieldCrops(parent, args, context) {
       const { token } = context;
+
+      // HACK: find a way to check user access for given farm
+      if (hasRights(token, "user")) {
+      return await db.FieldCrop.findAll({ where: { fieldId: args.fieldId } });
+      }
+
       const adminId = hasRights(token, "admin");
       if (!adminId) throw new Error("Unauthorized");
 
@@ -39,6 +51,12 @@ module.exports = {
 
     async getFarmMachines(parent, args, context) {
       const { token } = context;
+
+      // HACK: find a way to check user access for given farm
+      if (hasRights(token, "user")) {
+        return await db.FarmMachine.findAll({ where: { farmId: args.farmId } });
+      }
+
       const adminId = hasRights(token, "admin");
       if (!adminId) throw new Error("Unauthorized");
 
