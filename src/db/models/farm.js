@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Field, {
         sourceKey: "id",
         foreignKey: "farmId"
+      }),
+      this.hasMany(models.FarmMachine, {
+        sourceKey: "id",
+        foreignKey: "farmId"
       })
     }
   }

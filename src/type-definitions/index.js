@@ -4,6 +4,8 @@ module.exports = gql`
   extend type Query {
     getFarms: [Farm]
     getFarmFields(farmId: ID): [Field]
+    getFieldCrops(fieldId: ID): [FieldCrop]
+    getFarmMachines(farmId: ID): [FarmMachine]
   }
 
   extend type Mutation {
@@ -22,6 +24,18 @@ module.exports = gql`
     soilType: String!
   }
 
+  type FieldCrop {
+    id: ID
+    growth: Int
+    crop: Crop
+  }
+
+  type FarmMachine {
+    id: ID
+    quantity: Int
+    machine: Machine
+  }
+
   extend type Region @key(fields: "id") {
     id: ID! @external
     countryId: ID! @external
@@ -30,5 +44,13 @@ module.exports = gql`
 
   extend type Country @key(fields: "code") {
     code: ID @external
+  }
+
+  extend type Crop @key(fields: "id") {
+    id: ID! @external
+  }
+
+  extend type Machine @key(fields: "id") {
+    id: ID! @external
   }
 `

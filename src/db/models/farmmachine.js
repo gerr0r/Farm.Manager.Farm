@@ -1,37 +1,31 @@
-const { Model } = require('sequelize');
+const { Model } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
-  class Field extends Model {
+  class FarmMachine extends Model {
     static associate(models) {
       this.belongsTo(models.Farm, {
         foreignKey: 'farmId'
-      }),
-      this.hasMany(models.FieldCrop, {
-        sourceKey: "id",
-        foreignKey: "fieldId",
       })
     }
-  }
-  Field.init({
+  };
+  FarmMachine.init({
     id: {
       allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    soilType: {
-      type: DataTypes.ENUM,
-      values: ['sandy','clay','silt','peat','chalk','loam']
-    },
     farmId: {
       type: DataTypes.UUID,
-      references: {
-        model: {
-          tableName: 'Farm',
-        },
-        key: 'id'
-      },
       allowNull: false
+    },
+    machineId: {
+      type: DataTypes.UUID,
+      allowNull: false
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
     createdAt: {
       allowNull: false,
@@ -43,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    tableName: 'Field',
-    modelName: 'Field',
+    tableName: 'FarmMachine',
+    modelName: 'FarmMachine',
   });
-  return Field
-}
+  return FarmMachine;
+};
